@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Netflix from './pages/Netflix';
+import Home from './pages/Home'
 import Player from './pages/Player';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <Route exact path='/login' element={<Login />} />
         <Route exact path='/signup' element={<Signup />} />
         <Route exact path='player' element={<Player />} />
-        <Route exact path='/' element={<Netflix />} />
+        <Route exact path='/' element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

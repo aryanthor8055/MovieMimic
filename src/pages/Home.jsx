@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { getGenres } from '../store';
 
 
-const Netflix = () => {
+const Home = () => {
   const navigate = useNavigate()
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -56,7 +56,7 @@ const Netflix = () => {
     </Container>
   );
 }
-export default Netflix;
+export default Home;
 
 const Container = styled.div`
   background-color: black;
@@ -77,6 +77,7 @@ const Container = styled.div`
           width: 100%;
           height: 100%;
           margin-left: 5rem;
+          
         }
       }
       .buttons {

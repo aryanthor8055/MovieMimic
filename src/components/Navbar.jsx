@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import logo from "../assets/logo.png"
 import { Link, useNavigate } from 'react-router-dom'
 import { FaPowerOff, FaSearch } from 'react-icons/fa'
 import { firebaseAuth } from '../utils/firebase-config'
@@ -35,7 +34,9 @@ const Navbar = ({ isScrolled }) => {
             <nav className={`flex ${isScrolled ? "scrolled" : ""}`}>
                 <div className='left flex a-center'>
                     <div className='brand flex a-center j-center'>
-                        <img src={logo} alt="logo" />
+
+                        MOVIEMIMIC
+
                     </div>
                     <ul className='links flex'>
                         {
@@ -91,9 +92,9 @@ nav{
     .left{
         gap:2rem;
         .brand{
-            img{
-                height:4rem;
-            }
+        color:red;
+    font-size:40px;
+    font-weight:bold;
         }
         .links{
             list-style-type:none;

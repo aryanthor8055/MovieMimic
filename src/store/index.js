@@ -8,8 +8,8 @@ const initialState = {
     genres: []
 };
 
-const NetflixSlice = createSlice({
-    name: "Netflix",
+const MoviemimicSlice = createSlice({
+    name: "Moviemimic",
     initialState,
     extraReducers: (builder) => {
         builder.addCase(getGenres.fulfilled, (state, action) => {
@@ -19,7 +19,7 @@ const NetflixSlice = createSlice({
     },
 });
 
-export const getGenres = createAsyncThunk("netflix/genres", async () => {
+export const getGenres = createAsyncThunk("moviemimic/genres", async () => {
     const { data } = await axios.get(`${TMDB_BASE_URL}/genre/movie/list?api_key=${API_KEY}`)
     console.log(data);
     // return data;
@@ -27,6 +27,6 @@ export const getGenres = createAsyncThunk("netflix/genres", async () => {
 
 export const store = configureStore({
     reducer: {
-        netflix: NetflixSlice.reducer,
+        moviemimic: MoviemimicSlice.reducer,
     },
 })
