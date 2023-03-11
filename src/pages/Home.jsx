@@ -6,13 +6,19 @@ import { FaPlay } from 'react-icons/fa'
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getGenres } from '../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMovies, getGenres } from '../store';
+import Slider from '../components/Slider';
 
 
 const Home = () => {
   const navigate = useNavigate()
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const genresLoaded = useSelector((state) => state.moviemimic.genresLoaded);
+  const movies = useSelector((state) => state.moviemimic.movies)
+
+
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true)
@@ -23,6 +29,10 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getGenres())
+  }, [])
+
+  useEffect(() => {
+    if (genresLoaded) dispatch(fetchMovies({ type: 'all' }))
   }, [])
 
   return (
@@ -53,6 +63,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Slider movies={movies} />
     </Container>
   );
 }

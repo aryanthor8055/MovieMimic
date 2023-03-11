@@ -9,10 +9,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path='/login' element={<Login />} />
-        <Route exact path='/signup' element={<Signup />} />
-        <Route exact path='player' element={<Player />} />
         <Route exact path='/' element={<Home />} />
+        <Route exact path='/signup' element={<Signup />} />
+        <Route exact path='/login' element={<Login />} />
+        <Route exact path='player' element={<Player />} />
       </Routes>
     </BrowserRouter>
   );
