@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import video from '../assets/video.mp4'
@@ -12,7 +12,7 @@ import { BiChevronDown } from 'react-icons/bi'
 const Card = ({ movieData, isLiked = false }) => {
     const navigate = useNavigate()
     const [isHovered, setIsHovered] = useState(false);
-    console.log(movieData.genres);
+
     return (
         <Container onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             <img src={`https://image.tmdb.org/t/p/w500${movieData.image}`} alt="movie" />
@@ -57,7 +57,8 @@ const Card = ({ movieData, isLiked = false }) => {
     )
 }
 
-export default Card
+
+export default memo(Card);
 
 const Container = styled.div`
 max-width:230px;

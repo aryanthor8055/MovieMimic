@@ -1,7 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, memo } from 'react'
 import Card from './Card'
 import styled from 'styled-components'
+
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+
+
 
 const CardSlider = ({ data, title }) => {
     const [showControls, setShowControls] = useState(false);
@@ -43,9 +46,12 @@ const CardSlider = ({ data, title }) => {
 
         </Container>
     )
+
 }
 
-export default CardSlider
+
+export default memo(CardSlider);
+
 
 const Container = styled.div`
 gap:1rem;

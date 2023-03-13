@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { BsArrowLeft } from 'react-icons/bs';
 import Video from '../assets/video.mp4'
@@ -18,7 +18,7 @@ const Player = () => {
     )
 }
 
-export default Player
+export default memo(Player);
 
 const Container = styled.div`
 .player{

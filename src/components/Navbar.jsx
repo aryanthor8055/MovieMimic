@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaPowerOff, FaSearch } from 'react-icons/fa'
@@ -72,7 +72,7 @@ const Navbar = ({ isScrolled }) => {
     )
 }
 
-export default Navbar
+export default memo(Navbar);
 
 const Container = styled.div`
 .scrolled {

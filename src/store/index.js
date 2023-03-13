@@ -107,12 +107,13 @@ const MoviemimicSlice = createSlice({
             state.genres = action.payload;
             state.genresLoaded = true;
         });
-        builder.addCase(fetchMovies.fulfilled, (state, action) => {
-            state.movies = action.payload;
-        });
         builder.addCase(fetchDataByGenre.fulfilled, (state, action) => {
             state.movies = action.payload;
         });
+        builder.addCase(fetchMovies.fulfilled, (state, action) => {
+            state.movies = action.payload;
+        });
+
         builder.addCase(getUsersLikedMovies.fulfilled, (state, action) => {
             state.movies = action.payload;
         });

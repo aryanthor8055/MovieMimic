@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import CardSlider from './CardSlider'
 
 const Slider = ({ movies }) => {
@@ -18,4 +18,4 @@ const Slider = ({ movies }) => {
     )
 }
 
-export default Slider
+export default memo(Slider);

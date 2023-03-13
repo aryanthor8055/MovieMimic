@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import Navbar from '../components/Navbar';
 import backgroundImage from "../assets/home.jpg"
 import MovieLogo from "../assets/homeTitle.webp"
@@ -19,7 +19,6 @@ const Home = () => {
   const movies = useSelector((state) => state.moviemimic.movies)
 
 
-
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true)
     return () => (window.onscroll = null);
@@ -28,11 +27,19 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getGenres())
+    dispatch(getGenres());
+
   }, [])
 
+
+
   useEffect(() => {
-    if (genresLoaded) dispatch(fetchMovies({ type: 'all' }))
+    if (genresLoaded) {
+      dispatch(fetchMovies({ type: 'all' }))
+    } else {
+      dispatch(fetchMovies({ type: 'all' }))
+    }
+
   }, [])
 
   return (
@@ -67,7 +74,7 @@ const Home = () => {
     </Container>
   );
 }
-export default Home;
+export default memo(Home);
 
 const Container = styled.div`
   background-color: black;
