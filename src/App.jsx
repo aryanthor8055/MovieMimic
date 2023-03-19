@@ -5,6 +5,8 @@ import Signup from './pages/Signup';
 import Home from './pages/Home'
 import Player from './pages/Player';
 import Movies from './pages/Movies';
+import TVShows from './pages/TVShows';
+
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
         <Route exact path='/login' element={<Login />} />
         <Route exact path='player' element={<Player />} />
         <Route exact path='/movies' element={<Movies />} />
+        <Route exact path='/tv' element={<TVShows />} />
       </Routes>
     </BrowserRouter>
   );

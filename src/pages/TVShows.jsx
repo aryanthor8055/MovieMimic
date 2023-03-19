@@ -13,7 +13,7 @@ import Slider from '../components/Slider';
 import SelectGenre from '../components/SelectGenre';
 
 
-const Movies = () => {
+const TVShows = () => {
     const navigate = useNavigate()
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -61,7 +61,7 @@ const Movies = () => {
     )
 }
 
-export default Movies
+export default TVShows
 
 const Container = styled.div`
 .data{
