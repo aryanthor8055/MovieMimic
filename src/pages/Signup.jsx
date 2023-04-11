@@ -8,59 +8,59 @@ import { useNavigate } from 'react-router-dom'
 
 const Signup = () => {
 
-    const navigate = useNavigate()
-    const [showPassword, setShowPassword] = useState(false)
-    const [formValues, setFormValues] = useState({
-        email: "",
-        password: ""
+  const navigate = useNavigate()
+  const [showPassword, setShowPassword] = useState(false)
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: ""
 
-    })
+  })
 
-    const handleSignIn = async () => {
-        try {
-            const { email, password } = formValues;
-            await createUserWithEmailAndPassword(firebaseAuth, email, password)
-        } catch (error) {
-            console.log(error);
-        }
+  const handleSignIn = async () => {
+    try {
+      const { email, password } = formValues;
+      await createUserWithEmailAndPassword(firebaseAuth, email, password)
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    onAuthStateChanged(firebaseAuth, (currentUser) => {
-        if (currentUser) navigate('/')
-    })
-    return (
-        <Container>
-            <BackgroundImage />
-            <div className='content'>
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (currentUser) navigate('/')
+  })
+  return (
+    <Container>
+      <BackgroundImage />
+      <div className='content'>
 
 
-                <Header />
-                <div className='body flex column a-center j-center'>
-                    <div className='text flex column'>
-                        <h1>Unlimited movies,Tv shows and more</h1>
-                        <h4>Watch anywhere. Cancel anytime</h4>
-                        <h6>
-                            Ready to Watch?Enter your email to create or restart membership
-                        </h6>
-                    </div>
-                    <div className='form'>
-                        <input type='email' placeholder='Email Address' name='email' value={formValues.email} onChange={(e) => setFormValues({ ...formValues, [e.target.name]: e.target.value })} />
-                        {
-                            showPassword && <input type='password' placeholder='Password' name="password" value={formValues.password} onChange={(e) => setFormValues({ ...formValues, [e.target.name]: e.target.value })} />
-                        }
+        <Header login={"/signup"} />
+        <div className='body flex column a-center j-center'>
+          <div className='text flex column'>
+            <h1>Unlimited movies,Tv shows and more</h1>
+            <h4>Watch anywhere. Cancel anytime</h4>
+            <h6>
+              Ready to Watch?Enter your email to create or restart membership
+            </h6>
+          </div>
+          <div className='form'>
+            <input type='email' placeholder='Email Address' name='email' value={formValues.email} onChange={(e) => setFormValues({ ...formValues, [e.target.name]: e.target.value })} />
+            {
+              showPassword && <input type='password' placeholder='Password' name="password" value={formValues.password} onChange={(e) => setFormValues({ ...formValues, [e.target.name]: e.target.value })} />
+            }
 
-                        {
-                            !showPassword && <button onClick={() => setShowPassword(true)}>Get Started</button>
-                        }
+            {
+              !showPassword && <button onClick={() => setShowPassword(true)}>Get Started</button>
+            }
 
-                    </div>
-                    <button onClick={handleSignIn}>
-                        Sign Up
-                    </button>
-                </div>
-            </div>
-        </Container>
-    )
+          </div>
+          <button onClick={handleSignIn}>
+            Sign Up
+          </button>
+        </div>
+      </div>
+    </Container>
+  )
 }
 
 
@@ -90,7 +90,7 @@ const Container = styled.div`
       .form {
         display: grid;
         grid-template-columns: ${({ showPassword }) =>
-        showPassword ? "1fr 1fr" : "2fr 1fr"};
+    showPassword ? "1fr 1fr" : "2fr 1fr"};
         width: 60%;
         input {
           color: black;

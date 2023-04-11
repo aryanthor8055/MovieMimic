@@ -1,9 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const Header = (props) => {
     const navigate = useNavigate()
+    const params = useParams()
+
+    console.log(params);
     return (
         <Container className='flex a-center j-between'>
             <div className='logo'>
