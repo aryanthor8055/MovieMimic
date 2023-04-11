@@ -1,4 +1,5 @@
 import React, { useState, memo } from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import video from '../assets/video.mp4'
@@ -8,10 +9,31 @@ import { RiThumbUpFill, RiThumbDownFill } from 'react-icons/ri'
 import { BsCheck } from 'react-icons/bs'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { BiChevronDown } from 'react-icons/bi'
+import { onAuthStateChanged } from 'firebase/auth';
+import { firebaseAuth } from '../utils/firebase-config';
+import axios from 'axios'
+import { removeMovieFromLiked } from '../store';
+
 
 const Card = ({ movieData, isLiked = false }) => {
     const navigate = useNavigate()
     const [isHovered, setIsHovered] = useState(false);
+    const [email, setEmail] = useState(undefined)
+
+    onAuthStateChanged(firebaseAuth, (currentUser) => {
+        if (currentUser) setEmail(currentUser.email);
+        else navigate("/login")
+    })
+
+    const dispatch = useDispatch();
+
+    const addToList = async () => {
+        try {
+            await axios.post("http://localhost:5000/api/user/add", { email, data: movieData })
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <Container onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
@@ -32,8 +54,8 @@ const Card = ({ movieData, isLiked = false }) => {
                                     <RiThumbDownFill title='Dislike' />
                                     {
                                         isLiked ? (
-                                            <BsCheck title='Removo From List' />
-                                        ) : (<AiOutlinePlus title='Add to my list' />)
+                                            <BsCheck title='Removo From List' onClick={() => dispatch(removeMovieFromLiked({ movieId: movieData.id, email }))} />
+                                        ) : (<AiOutlinePlus title='Add to my list' onClick={addToList} />)
                                     }
                                     <div className='info'>
                                         <BiChevronDown title='More Info' />

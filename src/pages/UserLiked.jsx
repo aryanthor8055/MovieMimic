@@ -2,7 +2,7 @@ import React, { useState, useEffect, memo } from 'react'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMovies, getGenres } from '../store';
+import { fetchMovies, getGenres, getUsersLikedMovies } from '../store';
 import {
     firebaseAuth
 } from '../utils/firebase-config';
@@ -11,65 +11,70 @@ import Navbar from '../components/Navbar';
 import NotAvailable from '../components/NotAvailable';
 import Slider from '../components/Slider';
 import SelectGenre from '../components/SelectGenre';
+import Card from '../components/Card';
 
 
-const TVShows = () => {
+const UserLiked = () => {
+
     const navigate = useNavigate()
     const [isScrolled, setIsScrolled] = useState(false);
 
-    const genresLoaded = useSelector((state) => state.moviemimic.genresLoaded);
-    const movies = useSelector((state) => state.moviemimic.movies)
-    const genres = useSelector((state) => state.moviemimic.genres)
 
+
+    const movies = useSelector((state) => state.moviemimic.movies)
+
+
+    const [email, setEmail] = useState(undefined)
+
+    onAuthStateChanged(firebaseAuth, (currentUser) => {
+        if (currentUser) setEmail(currentUser.email);
+        else navigate("/login")
+    })
 
     window.onscroll = () => {
         setIsScrolled(window.pageYOffset === 0 ? false : true)
         return () => (window.onscroll = null);
     }
-
-    onAuthStateChanged(firebaseAuth, (currentUser) => {
-        // if (currentUser) navigate('/')
-    })
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getGenres())
-
-    }, [])
-
-
-
-    useEffect(() => {
-        if (genresLoaded) {
-            dispatch(fetchMovies({ type: 'tv' }))
+        if (email) {
+            dispatch(getUsersLikedMovies(email))
         }
+    }, [email])
 
-    }, [genresLoaded])
+
 
     return (
         <Container>
-            <div className='navbar'>
-                <Navbar isScrolled={isScrolled} />
-            </div>
-            <div className='data'>
-                <SelectGenre genres={genres} type="tv" />
-                {
-                    movies.length ? (<Slider movies={movies} />) : (<NotAvailable />)
-                }
+            <Navbar isScrolled={isScrolled} />
+            <div className='content flex column'>
+                <h1>
+                    My List
+                </h1>
+                <div className='grid flex'>
+                    {movies.map((movie, index) => {
+                        return <Card movieData={movie} index={index} key={movie.id} isLiked={true} />
+                    })}
+                </div>
             </div>
         </Container>
     )
 }
 
-export default TVShows
+export default UserLiked
 
 const Container = styled.div`
-.data{
+.content{
+    margin-top:2.3rem;
     margin-top:8rem;
-    .not-available{
-        text-align:center;
-        color:white;
-        margin-top:4rem;
+    gap:3rem;
+    h1{
+        margin-left:3rem;
+    }
+    .grid{
+        flex-wrap:wrap;
+        gap:1rem;
     }
 }
 `
